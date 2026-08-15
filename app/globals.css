@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a1b33;
+  --color-ink-deep: #05101f;
+  --color-amber: #f2a93b;
+  --color-marigold: #e8823c;
+  --color-rose: #e15c5c;
+  --color-teal: #2e8b84;
+  --color-cream: #f5ebd8;
+
+  --font-display: var(--font-tiro-bangla), "Noto Serif Bengali", serif;
+  --font-bengali: var(--font-hind-siliguri), "Noto Sans Bengali", sans-serif;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow:
+      0 0 18px rgba(242, 169, 59, 0.55),
+      0 0 42px rgba(242, 169, 59, 0.25);
+  }
+  50% {
+    opacity: 0.92;
+    text-shadow:
+      0 0 12px rgba(242, 169, 59, 0.4),
+      0 0 30px rgba(242, 169, 59, 0.18);
+  }
+}
+
+@keyframes vinylspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.blink {
+  animation: blink 1s step-start infinite;
+}
+
+.title-flicker {
+  animation: flicker 4.5s ease-in-out infinite;
+}
+
+.vinyl-spin {
+  animation: vinylspin 8s linear infinite;
+}
+
+.safe-t {
+  top: max(1rem, env(safe-area-inset-top));
+}
+.safe-b {
+  bottom: max(1rem, env(safe-area-inset-bottom));
+}
+.safe-l {
+  left: max(1rem, env(safe-area-inset-left));
+}
+.safe-r {
+  right: max(1rem, env(safe-area-inset-right));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title-flicker,
+  .vinyl-spin,
+  .blink {
+    animation: none !important;
+  }
+}
+
+body {
+  background: var(--color-ink-deep);
+  color: var(--color-cream);
+}
+
+.hero-bg {
+  background-image: url("/bg/scene-wide.png");
+  background-position: center 38%;
+}
+
+/* No separate portrait asset yet (see README) — on tall/narrow screens
+   we zoom and re-anchor the same wide image toward its lit, populated
+   centre instead of showing the wide empty sky at the top. Swap in a
+   dedicated scene-tall.png here later for a purpose-composed portrait
+   crop. */
+@media (orientation: portrait) {
+  .hero-bg {
+    background-size: 220%;
+    background-position: center 62%;
+  }
+}
